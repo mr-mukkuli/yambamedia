@@ -197,6 +197,7 @@ strong {
   cursor: pointer;
   border-radius: 6px;
   transition: var(--transition);
+  font-size: 0.9rem;
 }
 
 .nav-link:hover {
@@ -1361,4 +1362,101 @@ section {
 .lucide {
   display: inline-block;
   vertical-align: middle;
+}
+
+/* ===== MOBILE RESPONSIVE FIXES ===== */
+@media (max-width: 767px) {
+
+  /* Contact section fixes */
+  .contact-grid {
+    gap: 1rem;
+    padding: 0 0.5rem;
+  }
+
+  .contact-card {
+    padding: 1rem;
+    margin: 0 -0.5rem;
+  }
+
+  .contact-card.highlight {
+    padding: 1rem;
+  }
+
+  .highlight-list {
+    gap: 0.5rem;
+    max-height: none;
+  }
+
+  .highlight-item {
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .highlight-item p {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    flex: 1;
+    min-width: 0;
+    /* Important for text wrapping */
+  }
+
+  .contact-card-content a {
+    font-size: 1rem;
+    word-break: break-word;
+  }
+
+  /* Form adjustments */
+  .contact-form-container {
+    padding: 1rem;
+    margin: 0 -0.5rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.625rem;
+    font-size: 16px;
+    /* Prevents zoom on iOS */
+  }
+
+  /* Container padding */
+  .container {
+    padding: 0 0.75rem;
+  }
+
+  /* Prevent horizontal scrolling */
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* Ensure all sections fit within viewport */
+  section {
+    padding: 2rem 0;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .contact-card.highlight h3 {
+    font-size: 1rem;
+  }
+
+  .highlight-item p {
+    font-size: 0.8rem;
+  }
+
+  .contact-card-content a {
+    font-size: 0.9rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+    max-width: 280px;
+  }
 }
