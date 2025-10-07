@@ -29,7 +29,9 @@
           <button class="nav-link" data-section="about">About</button>
           <button class="nav-link" data-section="team">Team</button>
           <button class="nav-link" data-section="projects">Projects</button>
+          <button class="nav-link" data-section="podcast">Podcast</button>
           <button class="nav-link" data-section="contact">Contact</button>
+          <a href="audio.html" class="nav-link">Audio Services</a>
         </div>
 
         <button id="mobile-menu-toggle" class="mobile-menu-toggle">
@@ -172,7 +174,6 @@
           <h2 class="section-title">Social Strategy</h2>
           <p class="section-description">Choose the perfect plan to elevate your social media presence</p>
         </div>
-
         <div class="pricing-grid">
           <div class="pricing-card">
             <div class="pricing-header">
@@ -574,7 +575,7 @@
 
           <div class="team-card">
             <img src="assets/kasamba.png" alt="Kasamba K. Mukkuli" class="team-avatar-img">
-            <h3 class="team-name">Kasamba M. Mukkuli</h3>
+            <h3 class="team-name">Kasamba K. Mukkuli</h3>
             <p class="team-role">Digital & Web Content</p>
           </div>
         </div>
@@ -590,9 +591,16 @@
         </div>
 
         <div class="projects-grid">
+          <!-- Videography -->
           <div class="project-card">
-            <div class="project-icon">
-              <i class="fa-solid fa-film"></i>
+            <div class="project-video-container">
+              <video class="project-video" muted loop autoplay playsinline>
+                <source src="assets/videography-demo.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+              <button class="mute-toggle" onclick="toggleMute(this)">
+                <i class="fas fa-volume-mute"></i>
+              </button>
             </div>
             <div class="project-info">
               <span class="project-category">Videography</span>
@@ -602,9 +610,16 @@
             </div>
           </div>
 
+          <!-- Photography -->
           <div class="project-card">
-            <div class="project-icon">
-              <i class="fa-solid fa-camera"></i>
+            <div class="project-video-container">
+              <video class="project-video" muted loop autoplay playsinline>
+                <source src="assets/photography-demo.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+              <button class="mute-toggle" onclick="toggleMute(this)">
+                <i class="fas fa-volume-mute"></i>
+              </button>
             </div>
             <div class="project-info">
               <span class="project-category">Photography</span>
@@ -614,9 +629,16 @@
             </div>
           </div>
 
+          <!-- Design -->
           <div class="project-card">
-            <div class="project-icon">
-              <i class="fa-solid fa-palette"></i>
+            <div class="project-video-container">
+              <video class="project-video" muted loop autoplay playsinline>
+                <source src="assets/design-demo.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+              <button class="mute-toggle" onclick="toggleMute(this)">
+                <i class="fas fa-volume-mute"></i>
+              </button>
             </div>
             <div class="project-info">
               <span class="project-category">Design</span>
@@ -626,9 +648,16 @@
             </div>
           </div>
 
+          <!-- Audio -->
           <div class="project-card">
-            <div class="project-icon">
-              <i class="fa-solid fa-music"></i>
+            <div class="project-video-container">
+              <video class="project-video" muted loop autoplay playsinline>
+                <source src="assets/audio-demo.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+              <button class="mute-toggle" onclick="toggleMute(this)">
+                <i class="fas fa-volume-mute"></i>
+              </button>
             </div>
             <div class="project-info">
               <span class="project-category">Audio</span>
@@ -638,34 +667,112 @@
             </div>
           </div>
 
+          <!-- Social Media -->
           <div class="project-card">
-            <div class="project-icon">
-              <i class="fa-solid fa-film"></i>
+            <div class="project-video-container">
+              <video class="project-video" muted loop autoplay playsinline>
+                <source src="assets/social-media-demo.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+              <button class="mute-toggle" onclick="toggleMute(this)">
+                <i class="fas fa-volume-mute"></i>
+              </button>
             </div>
             <div class="project-info">
               <span class="project-category">Social Media</span>
               <h3 class="project-title">Social Media Content</h3>
               <p class="project-description">Engaging reels, short videos, and graphics optimized for maximum social
-                media
-                impact.</p>
+                media impact.</p>
             </div>
           </div>
 
+          <!-- Product Photography -->
           <div class="project-card">
-            <div class="project-icon">
-              <i class="fa-solid fa-camera"></i>
+            <div class="project-video-container">
+              <video class="project-video" muted loop autoplay playsinline>
+                <source src="assets/product-demo.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+              <button class="mute-toggle" onclick="toggleMute(this)">
+                <i class="fas fa-volume-mute"></i>
+              </button>
             </div>
             <div class="project-info">
               <span class="project-category">Photography</span>
               <h3 class="project-title">Product Photography</h3>
               <p class="project-description">Dynamic product shots with professional lighting and composition to
-                showcase
-                your offerings.</p>
+                showcase your offerings.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- Keep this script at the bottom -->
+    <script>
+      // Simple inline mute toggle function
+      function toggleMute(button) {
+        const video = button.closest('.project-video-container').querySelector('video');
+        const icon = button.querySelector('i');
+
+        // Toggle mute state
+        video.muted = !video.muted;
+
+        // Update icon and button color
+        if (video.muted) {
+          icon.className = 'fas fa-volume-mute';
+          button.style.background = 'rgba(0, 0, 0, 0.7)';
+        } else {
+          icon.className = 'fas fa-volume-up';
+          button.style.background = 'rgba(0, 200, 150, 0.8)';
+        }
+      }
+    </script>
+
+
+    <!-- Podcast Section -->
+    <section id="podcast" class="podcast-section" style="background-color: var(--card); padding: 4rem 0;">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Our Podcast</h2>
+          <p class="section-description">Listen to our latest episodes on YouTube</p>
+        </div>
+
+        <div class="podcast-grid"
+          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+          <!-- Podcast Episode 1 -->
+          <div class="podcast-card"
+            style="background: var(--background); border-radius: 12px; overflow: hidden; transition: var(--transition);">
+            <div class="podcast-thumbnail"
+              style="position: relative; padding-bottom: 56.25%; background: linear-gradient(135deg, var(--primary), var(--blue));">
+              <img src="assets/podcast1-thumb.jpg" alt="Podcast Episode 1"
+                style="position: absolute; width: 100%; height: 100%; object-fit: cover;">
+              <div class="play-button"
+                style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,255,255,0.9); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-play" style="color: var(--primary); font-size: 1.5rem; margin-left: 4px;"></i>
+              </div>
+            </div>
+            <div class="podcast-info" style="padding: 1.5rem;">
+              <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Creative Perspectives</h3>
+              <p style="color: var(--muted-foreground); margin-bottom: 1rem;">Exploring creativity in the digital age
+              </p>
+              <a href="https://youtube.com/your-channel" target="_blank" class="btn btn-outline" style="width: 100%;">
+                <i class="fab fa-youtube"></i> Watch on YouTube
+              </a>
+            </div>
+          </div>
+
+          <!-- Add more podcast episodes as needed -->
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+          <a href="https://youtube.com/your-channel" target="_blank" class="btn btn-primary">
+            <i class="fab fa-youtube"></i> Visit Our YouTube Channel
+          </a>
+        </div>
+      </div>
+    </section>
+
 
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
@@ -871,8 +978,6 @@
       </div>
     </div>
   </footer>
-
-  <script src="script.js"></script>
 </body>
 
 </html>
