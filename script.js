@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
-
+  "Estimated Total"
   // Close modal with Escape key
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && pricingModal && pricingModal.classList.contains('active')) {
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
             formSuccess.style.display = 'none';
             submitButton.textContent = originalButtonText;
             submitButton.disabled = false;
-            
+
             if (selectedServices.length > 0) {
               selectedServices = [];
               serviceCheckboxes.forEach(checkbox => checkbox.checked = false);
@@ -247,23 +247,24 @@ document.addEventListener('DOMContentLoaded', function () {
       const totalPriceDataField = document.getElementById('total-price-data');
 
       if (servicesDataField && totalPriceDataField) {
-        const servicesList = selectedServices.map(service => 
-          `${service.name} (K ${service.price.toLocaleString()})`
+        const servicesList = selectedServices.map(service =>
+          `${service.name}`
         ).join(', ');
 
         servicesDataField.value = servicesList || 'None';
-        totalPriceDataField.value = `K ${totalPrice.toLocaleString()}`;
+        totalPriceDataField.value = ``;
       }
     }
 
-    // Get quote action
+
     if (getQuoteBtn) {
       getQuoteBtn.addEventListener('click', function () {
-        const servicesWithPrices = selectedServices.map(service => 
-          `${service.name} (K ${service.price.toLocaleString()})`
+        // Just service names, no prices
+        const servicesList = selectedServices.map(service =>
+          `${service.name}`
         ).join('\n• ');
-        
-        const message = `I'm interested in getting a detailed estimate for the following services:\n\n• ${servicesWithPrices}\n\nEstimated Total: K ${totalPrice.toLocaleString()}\n\nPlease provide me with a detailed estimate and next steps.`;
+
+        const message = `I'm interested in hiring your team for the following services:\n\n• ${servicesList}\n\nPlease let me know what the next steps are.`;
 
         const contactForm = document.getElementById('contact-form');
         if (contactForm) {
@@ -279,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function () {
             pricingModal.classList.remove('active');
             document.body.style.overflow = 'auto';
           }
-          
+
           scrollToSection('contact');
           showNotification('Services added to estimate! Fill out your details below.');
         }
