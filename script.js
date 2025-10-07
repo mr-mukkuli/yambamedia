@@ -346,3 +346,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
   updateActiveSection();
 });
+
+// Simple Local Video Controls
+function initSimpleVideoControls() {
+  // Add click events to mute buttons
+  document.querySelectorAll('.mute-toggle').forEach(button => {
+    button.addEventListener('click', function () {
+      const video = this.closest('.project-video-container').querySelector('video');
+      const icon = this.querySelector('i');
+
+      // Toggle mute state
+      video.muted = !video.muted;
+
+      // Update icon and button color
+      if (video.muted) {
+        icon.className = 'fas fa-volume-mute';
+        this.style.background = 'rgba(0, 0, 0, 0.7)';
+      } else {
+        icon.className = 'fas fa-volume-up';
+        this.style.background = 'rgba(0, 200, 150, 0.8)';
+      }
+    });
+  });
+
+  // Auto-play all videos (they start muted)
+  document.querySelectorAll('.project-video').forEach(video => {
+    video.play().catch(error => {
+      console.log('Auto-play was prevented:', error);
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initSimpleVideoControls);
