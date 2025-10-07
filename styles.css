@@ -1823,3 +1823,143 @@ section {
 
   .about-grid {}
 }
+
+
+
+/* ===== MOBILE MODAL FIXES ===== */
+@media (max-width: 768px) {
+  .modal-content {
+    margin: 20px auto;
+    width: 95%;
+    max-height: 85vh;
+    border-radius: 12px;
+  }
+  
+  .modal-header {
+    padding: 20px;
+    position: sticky;
+    top: 0;
+  }
+  
+  .modal-title {
+    font-size: 1.4em !important;
+  }
+  
+  .modal-close {
+    font-size: 2em !important;
+    width: 35px;
+    height: 35px;
+  }
+  
+  .pricing-calculator {
+    padding: 20px;
+    gap: 25px;
+    grid-template-columns: 1fr !important;
+  }
+  
+  .calculator-subtitle,
+  .summary-title {
+    font-size: 1.2em !important;
+    margin-bottom: 20px;
+  }
+  
+  .service-option-label {
+    padding: 15px;
+  }
+  
+  .service-option-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  
+  .service-option-title {
+    font-size: 1.1em !important;
+  }
+  
+  .service-option-price {
+    font-size: 1.1em !important;
+    font-weight: bold;
+  }
+  
+  .service-option-desc {
+    font-size: 0.85em !important;
+    line-height: 1.4;
+  }
+  
+  .calculator-summary {
+    padding: 20px;
+    position: relative;
+    top: 0;
+  }
+  
+  .summary-total {
+    font-size: 1.3em;
+    padding: 15px 0;
+  }
+  
+  .get-quote-btn {
+    padding: 12px;
+    font-size: 1em;
+  }
+  
+  .selected-service-item {
+    padding: 8px 0;
+    font-size: 0.9em;
+  }
+}
+
+/* ===== SMALL PHONE FIXES ===== */
+@media (max-width: 480px) {
+  .modal-content {
+    margin: 10px auto;
+    width: 98%;
+    max-height: 90vh;
+  }
+  
+  .pricing-calculator {
+    padding: 15px;
+    gap: 20px;
+  }
+  
+  .service-option-label {
+    padding: 12px;
+  }
+  
+  .service-option-title {
+    font-size: 1em !important;
+  }
+  
+  .service-option-desc {
+    font-size: 0.8em !important;
+  }
+  
+  .calculator-summary {
+    padding: 15px;
+  }
+}
+
+/* ===== MODAL SCROLL FIXES ===== */
+.modal-content {
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Ensure modal doesn't break on very small screens */
+@media (max-width: 360px) {
+  .modal-header {
+    padding: 15px;
+  }
+  
+  .modal-title {
+    font-size: 1.2em !important;
+  }
+  
+  .pricing-calculator {
+    padding: 10px;
+  }
+  
+  .service-option-label {
+    padding: 10px;
+  }
+}
