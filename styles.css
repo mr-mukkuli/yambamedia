@@ -105,20 +105,21 @@ strong {
   color: var(--primary);
 }
 
-/* Navigation */
+/* Ensure navbar has proper positioning */
 #navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 50;
+  z-index: 1000;
   transition: var(--transition);
+  background: transparent;
 }
 
 #navbar.scrolled {
-  background-color: rgba(28, 43, 39, 0.95);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: rgba(28, 43, 39, 0.95) !important;
+  backdrop-filter: blur(12px) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
 }
 
 .nav-container {
@@ -319,7 +320,7 @@ strong {
   align-items: flex-start;
   justify-content: center;
   pointer-events: none;
-  padding-top: 11%;
+  padding-top: 18%;
   padding-right: 12%;
 }
 
@@ -2029,4 +2030,111 @@ section {
     bottom: 8px;
     right: 8px;
   }
+}
+
+
+/* Blog Styles */
+.blog-section {
+  padding: 4rem 0;
+  background: var(--card);
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.blog-card {
+  background: var(--background);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: var(--transition);
+  border: 1px solid var(--border);
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-color: var(--primary);
+}
+
+.blog-image {
+  height: 200px;
+  background: linear-gradient(135deg, var(--primary), var(--blue));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 3rem;
+}
+
+.blog-content {
+  padding: 1.5rem;
+}
+
+.blog-date {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+.blog-card h3 {
+  font-size: 1.25rem;
+  margin: 0.5rem 0 1rem;
+  color: var(--foreground);
+  line-height: 1.4;
+}
+
+.blog-card p {
+  color: var(--muted-foreground);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.blog-read-more {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+}
+
+.blog-read-more:hover {
+  color: var(--primary-light);
+  gap: 0.75rem;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .blog-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .blog-image {
+    height: 160px;
+    font-size: 2.5rem;
+  }
+}
+
+
+/* Add this to your CSS file - missing button styles */
+.btn-secondary {
+  background-color: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 200, 150, 0.3);
+}
+
+/* Ensure modal button has proper cursor */
+#open-calculator-modal {
+  cursor: pointer;
 }
