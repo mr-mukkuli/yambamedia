@@ -1,132 +1,74 @@
 document.addEventListener('DOMContentLoaded', function () {
+  console.log('DOM loaded - starting script');
+
+  // Basic elements
   const navbar = document.getElementById('navbar');
   const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-  const logoButton = document.getElementById('logo-button');
-  const contactForm = document.getElementById('contact-form');
-  const formSuccess = document.getElementById('form-success');
-  const currentYearSpan = document.getElementById('current-year');
-
-  // Modal Elements
-  const pricingModal = document.getElementById('pricing-modal');
   const openModalBtn = document.getElementById('open-calculator-modal');
+  const pricingModal = document.getElementById('pricing-modal');
   const closeModalBtn = document.getElementById('close-modal');
 
-  // Pricing Calculator Elements
-  const selectedServicesDiv = document.getElementById('selected-services');
-  const totalPriceElement = document.getElementById('total-price');
-  const getQuoteBtn = document.getElementById('get-quote-btn');
-  const serviceCheckboxes = document.querySelectorAll('.service-checkbox');
+  // Set current year
+  const currentYearSpan = document.getElementById('current-year');
+  if (currentYearSpan) {
+    currentYearSpan.textContent = new Date().getFullYear();
+  }
 
-  // Pricing Calculator Variables
-  let selectedServices = [];
-  let totalPrice = 0;
+  // 1. NAVBAR SCROLL
+  if (navbar) {
+    console.log('Navbar found, setting up scroll');
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
 
-  currentYearSpan.textContent = new Date().getFullYear();
+      // Update active nav link based on scroll position
+      updateActiveNavLink();
+    });
 
-  function scrollToSection(sectionId) {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+    // Force check on load
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
     }
   }
 
-  window.addEventListener('scroll', function () {
-    if (window.scrollY > 50) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
+  // 2. HERO BUTTONS
+  console.log('Setting up hero buttons');
+  const heroButtons = document.querySelectorAll('.hero-buttons button');
+  heroButtons.forEach(button => {
+    button.addEventListener('click', function () {
+      const sectionId = this.getAttribute('data-section');
+      console.log('Hero button clicked:', sectionId);
 
-    updateActiveSection();
-  });
-
-  function updateActiveSection() {
-    const sections = ['home', 'services', 'pricing', 'about', 'team', 'projects', 'contact'];
-    const scrollPosition = window.scrollY + 100;
-
-    sections.forEach(sectionId => {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        const { offsetTop, offsetHeight } = element;
-        if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-          navLinks.forEach(link => {
-            if (link.getAttribute('data-section') === sectionId) {
-              link.classList.add('active');
-            } else {
-              link.classList.remove('active');
-            }
-          });
-          mobileNavLinks.forEach(link => {
-            if (link.getAttribute('data-section') === sectionId) {
-              link.classList.add('active');
-            } else {
-              link.classList.remove('active');
-            }
+      if (sectionId) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
           });
         }
       }
     });
-  }
-
-  mobileMenuToggle.addEventListener('click', function () {
-    mobileMenu.classList.toggle('active');
-    mobileMenuToggle.classList.toggle('active');
   });
 
-  logoButton.addEventListener('click', function () {
-    scrollToSection('home');
-    mobileMenu.classList.remove('active');
-    mobileMenuToggle.classList.remove('active');
-  });
-
-  navLinks.forEach(link => {
-    link.addEventListener('click', function () {
-      const sectionId = this.getAttribute('data-section');
-      scrollToSection(sectionId);
-    });
-  });
-
-  mobileNavLinks.forEach(link => {
-    link.addEventListener('click', function () {
-      const sectionId = this.getAttribute('data-section');
-      scrollToSection(sectionId);
-      mobileMenu.classList.remove('active');
-      mobileMenuToggle.classList.remove('active');
-    });
-  });
-
-  const allButtons = document.querySelectorAll('button[data-section]');
-  allButtons.forEach(button => {
-    if (!button.classList.contains('nav-link') &&
-      !button.classList.contains('mobile-nav-link') &&
-      button.id !== 'logo-button') {
-      button.addEventListener('click', function () {
-        const sectionId = this.getAttribute('data-section');
-        scrollToSection(sectionId);
-      });
-    }
-  });
-
-  // Modal Event Listeners
+  // 3. MODAL FUNCTIONALITY
   if (openModalBtn && pricingModal) {
-    openModalBtn.addEventListener('click', function () {
+    console.log('Setting up modal');
+    openModalBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      console.log('Opening modal');
       pricingModal.classList.add('active');
       document.body.style.overflow = 'hidden';
     });
   }
 
   if (closeModalBtn && pricingModal) {
-    closeModalBtn.addEventListener('click', function () {
+    closeModalBtn.addEventListener('click', function (e) {
+      e.preventDefault();
       pricingModal.classList.remove('active');
       document.body.style.overflow = 'auto';
     });
@@ -141,240 +83,325 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
-  "Estimated Total"
-  // Close modal with Escape key
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && pricingModal && pricingModal.classList.contains('active')) {
-      pricingModal.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
-  });
 
-  if (contactForm) {
-    contactForm.addEventListener('submit', async function (e) {
-      e.preventDefault();
-
-      const submitButton = contactForm.querySelector('button[type="submit"]');
-      const originalButtonText = submitButton.textContent;
-      submitButton.textContent = 'Sending...';
-      submitButton.disabled = true;
-
-      try {
-        const response = await fetch(contactForm.action, {
-          method: 'POST',
-          body: new FormData(contactForm),
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-
-        if (response.ok) {
-          contactForm.style.display = 'none';
-          formSuccess.style.display = 'flex';
-
-          setTimeout(() => {
-            contactForm.reset();
-            contactForm.style.display = 'flex';
-            formSuccess.style.display = 'none';
-            submitButton.textContent = originalButtonText;
-            submitButton.disabled = false;
-
-            if (selectedServices.length > 0) {
-              selectedServices = [];
-              serviceCheckboxes.forEach(checkbox => checkbox.checked = false);
-              updatePricingSummary();
-            }
-          }, 5000);
-        } else {
-          throw new Error('Form submission failed');
-        }
-      } catch (error) {
-        alert('There was an error sending your message. Please try again or contact us directly.');
-        submitButton.textContent = originalButtonText;
-        submitButton.disabled = false;
-      }
+  // 4. MOBILE MENU
+  if (mobileMenuToggle && mobileMenu) {
+    mobileMenuToggle.addEventListener('click', function () {
+      mobileMenu.classList.toggle('active');
+      mobileMenuToggle.classList.toggle('active');
     });
   }
 
-  // Pricing Calculator Functionality
-  if (serviceCheckboxes.length > 0) {
-    // Handle service selection
-    serviceCheckboxes.forEach(checkbox => {
-      checkbox.addEventListener('change', function () {
-        const serviceName = this.getAttribute('data-service');
-        const servicePrice = parseInt(this.getAttribute('data-price'));
+  // 5. NAVIGATION LINKS (only target links with data-section attribute)
+  const navLinks = document.querySelectorAll('.nav-link[data-section], .mobile-nav-link[data-section]');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function (e) {
+      const sectionId = this.getAttribute('data-section');
+      if (sectionId) {
+        e.preventDefault();
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
 
-        if (this.checked) {
-          selectedServices.push({
-            id: this.id,
-            name: serviceName,
-            price: servicePrice
+          // Close mobile menu if open
+          if (mobileMenu && mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+            mobileMenuToggle.classList.remove('active');
+          }
+        }
+      }
+    });
+  });
+
+  // 6. LOGO BUTTON - handle both anchor and button elements
+  const logoButton = document.getElementById('logo-button');
+  if (logoButton) {
+    logoButton.addEventListener('click', function (e) {
+      // Only prevent default and scroll if we're on the same page
+      const href = logoButton.getAttribute('href');
+      if (href === 'index.html' || href === '#home' || href === '#') {
+        e.preventDefault();
+        const homeElement = document.getElementById('home');
+        if (homeElement) {
+          homeElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
           });
         } else {
-          selectedServices = selectedServices.filter(service => service.id !== this.id);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
-        updatePricingSummary();
-      });
+      }
     });
-
-    // Update pricing summary
-    function updatePricingSummary() {
-      totalPrice = selectedServices.reduce((sum, service) => sum + service.price, 0);
-
-      if (selectedServices.length > 0) {
-        selectedServicesDiv.innerHTML = selectedServices.map(service => `
-          <div class="selected-service-item">
-            <span class="selected-service-name">${service.name}</span>
-            <span class="selected-service-price">K ${service.price.toLocaleString()}</span>
-          </div>
-        `).join('');
-
-        totalPriceElement.textContent = `K ${totalPrice.toLocaleString()}`;
-        getQuoteBtn.disabled = false;
-      } else {
-        selectedServicesDiv.innerHTML = '<p class="no-selection">No services selected yet</p>';
-        totalPriceElement.textContent = 'K 0';
-        getQuoteBtn.disabled = true;
-      }
-
-      updateHiddenFormFields();
-    }
-
-    // Update hidden form fields with pricing data
-    function updateHiddenFormFields() {
-      const servicesDataField = document.getElementById('selected-services-data');
-      const totalPriceDataField = document.getElementById('total-price-data');
-
-      if (servicesDataField && totalPriceDataField) {
-        const servicesList = selectedServices.map(service =>
-          `${service.name}`
-        ).join(', ');
-
-        servicesDataField.value = servicesList || 'None';
-        totalPriceDataField.value = ``;
-      }
-    }
-
-
-    if (getQuoteBtn) {
-      getQuoteBtn.addEventListener('click', function () {
-        // Just service names, no prices
-        const servicesList = selectedServices.map(service =>
-          `${service.name}`
-        ).join('\n• ');
-
-        const message = `I'm interested in hiring your team for the following services:\n\n• ${servicesList}\n\nPlease let me know what the next steps are.`;
-
-        const contactForm = document.getElementById('contact-form');
-        if (contactForm) {
-          const messageField = document.getElementById('message');
-          if (messageField) {
-            messageField.value = message;
-          }
-
-          updateHiddenFormFields();
-
-          // Close modal if open
-          if (pricingModal && pricingModal.classList.contains('active')) {
-            pricingModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-          }
-
-          scrollToSection('contact');
-          showNotification('Services added to estimate! Fill out your details below.');
-        }
-      });
-    }
   }
 
-  // Helper function to show notifications
-  function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.className = 'notification';
-    notification.textContent = message;
-    notification.style.cssText = `
-      position: fixed;
-      top: 100px;
-      right: 20px;
-      background: var(--primary);
-      color: white;
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      z-index: 1000;
-      animation: slideInRight 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      max-width: 300px;
-    `;
+  // 7. PRICING CALCULATOR FUNCTIONALITY
+  initPricingCalculator();
 
-    document.body.appendChild(notification);
+  // 8. FORM SUCCESS HANDLER
+  initFormHandler();
 
-    setTimeout(() => {
-      notification.style.animation = 'slideOutRight 0.3s ease';
-      setTimeout(() => {
-        notification.remove();
-      }, 300);
-    }, 3000);
-  }
+  // 9. VIDEO CONTROLS
+  initVideoControls();
 
-  // Add CSS for notification animations
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes slideInRight {
-      from {
-        transform: translateX(100%);
-        opacity: 0;
-      }
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
-    }
-    
-    @keyframes slideOutRight {
-      from {
-        transform: translateX(0);
-        opacity: 1;
-      }
-      to {
-        transform: translateX(100%);
-        opacity: 0;
-      }
-    }
-  `;
-  document.head.appendChild(style);
+  // 10. BLOG POST MODALS
+  initBlogModals();
 
-  updateActiveSection();
+  console.log('All event listeners set up');
 });
 
-// Simple Local Video Controls
-function initSimpleVideoControls() {
-  // Add click events to mute buttons
-  document.querySelectorAll('.mute-toggle').forEach(button => {
-    button.addEventListener('click', function () {
-      const video = this.closest('.project-video-container').querySelector('video');
-      const icon = this.querySelector('i');
+// PRICING CALCULATOR
+function initPricingCalculator() {
+  const checkboxes = document.querySelectorAll('.service-checkbox');
+  const selectedServices = document.getElementById('selected-services');
+  const totalPrice = document.getElementById('total-price');
+  const getQuoteBtn = document.getElementById('get-quote-btn');
+  const selectedServicesData = document.getElementById('selected-services-data');
+  const totalPriceData = document.getElementById('total-price-data');
+  const pricingModal = document.getElementById('pricing-modal');
 
-      // Toggle mute state
-      video.muted = !video.muted;
+  if (!checkboxes.length) return;
 
-      // Update icon and button color
-      if (video.muted) {
-        icon.className = 'fas fa-volume-mute';
-        this.style.background = 'rgba(0, 0, 0, 0.7)';
-      } else {
-        icon.className = 'fas fa-volume-up';
-        this.style.background = 'rgba(0, 200, 150, 0.8)';
+  function updateCalculator() {
+    let total = 0;
+    let selected = [];
+
+    checkboxes.forEach(checkbox => {
+      if (checkbox.checked) {
+        const price = parseInt(checkbox.dataset.price);
+        const service = checkbox.dataset.service;
+        total += price;
+        selected.push(service);
       }
     });
+
+    // Update display
+    if (selected.length > 0) {
+      selectedServices.innerHTML = selected.map(service => {
+        const checkbox = Array.from(checkboxes).find(cb => cb.dataset.service === service);
+        const priceText = checkbox ? checkbox.closest('.service-option').querySelector('.service-option-price').textContent : 'K 0';
+        return `<div class="selected-service-item">
+          <span class="selected-service-name">${service}</span>
+          <span class="selected-service-price">${priceText}</span>
+        </div>`;
+      }).join('');
+    } else {
+      selectedServices.innerHTML = '<p class="no-selection">No services selected yet</p>';
+    }
+
+    totalPrice.textContent = `K ${total.toLocaleString()}`;
+    getQuoteBtn.disabled = selected.length === 0;
+
+    // Update hidden form fields if they exist
+    if (selectedServicesData) selectedServicesData.value = selected.join(', ');
+    if (totalPriceData) totalPriceData.value = `K ${total.toLocaleString()}`;
+  }
+
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', updateCalculator);
   });
 
-  // Auto-play all videos (they start muted)
-  document.querySelectorAll('.project-video').forEach(video => {
-    video.play().catch(error => {
-      console.log('Auto-play was prevented:', error);
+  // Form submission handler
+  if (getQuoteBtn) {
+    getQuoteBtn.addEventListener('click', function () {
+      if (pricingModal) {
+        pricingModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+
+      // Scroll to contact form
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  }
+}
+
+// FORM SUCCESS HANDLER
+function initFormHandler() {
+  const contactForm = document.getElementById('contact-form');
+  const formSuccess = document.getElementById('form-success');
+
+  if (contactForm && formSuccess) {
+    contactForm.addEventListener('submit', function (e) {
+      setTimeout(() => {
+        formSuccess.style.display = 'flex';
+        contactForm.reset();
+
+        setTimeout(() => {
+          formSuccess.style.display = 'none';
+        }, 5000);
+      }, 1000);
+    });
+  }
+}
+
+// VIDEO CONTROLS
+function initVideoControls() {
+  document.querySelectorAll('.mute-toggle').forEach(button => {
+    button.addEventListener('click', function () {
+      const videoContainer = this.closest('.project-video-container');
+      if (videoContainer) {
+        const video = videoContainer.querySelector('video');
+        const icon = this.querySelector('i');
+
+        if (video && icon) {
+          video.muted = !video.muted;
+
+          if (video.muted) {
+            icon.className = 'fas fa-volume-mute';
+            this.style.background = 'rgba(0, 0, 0, 0.7)';
+          } else {
+            icon.className = 'fas fa-volume-up';
+            this.style.background = 'rgba(0, 200, 150, 0.8)';
+          }
+        }
+      }
     });
   });
 }
 
-document.addEventListener('DOMContentLoaded', initSimpleVideoControls);
+// BLOG POST MODALS
+function initBlogModals() {
+  const blogModal = document.getElementById('blog-modal');
+  if (!blogModal) return;
+
+  const modalTitle = blogModal.querySelector('.blog-modal-title');
+  const modalDate = blogModal.querySelector('.blog-modal-date');
+  const modalContent = blogModal.querySelector('.blog-modal-content');
+  const closeBtn = blogModal.querySelector('.blog-modal-close');
+
+  // Blog post data
+  const blogPosts = {
+    'elections-2026': {
+      title: '2026 elections are here.',
+      date: 'December 10, 2024',
+      content: `
+        <p>The not so interesting, but very interesting question on everyone's mind. Guys, who are we voting for next year ai?</p>
+        <p>As we approach the 2026 elections, it's crucial for every citizen to stay informed and engaged in the political process. This election will shape the future of our nation for years to come.</p>
+        <p>At Yamba Media, we believe in the power of informed decision-making. We encourage everyone to research the candidates, understand their platforms, and make your voice heard at the polls.</p>
+        <p>Remember, democracy thrives when citizens participate. Let's make 2026 a year of positive change and collective action.</p>
+      `
+    },
+    'mukazi-samba': {
+      title: '"Guys Mukazi Samba"',
+      date: 'October 7, 2024',
+      content: `
+        <p>October heat in the land of work and joy. (Blog post sponsored by Mbozi scents, smellz like heaven.)</p>
+        <p>October has arrived with its signature warmth, bringing with it a renewed energy to our creative endeavors. At Yamba Media, we're embracing the heat with fresh ideas and innovative projects.</p>
+        <p>This month, we're focusing on celebrating the spirit of hard work and the joy that comes from creating meaningful content. Whether it's a new brand identity, a compelling video, or a stunning photograph, we're here to help you tell your story.</p>
+        <p>And yes, we're keeping things fresh with Mbozi scents – because even in the October heat, we believe in making everything smell like heaven!</p>
+      `
+    },
+    'kasamba-vs-doritos': {
+      title: 'A Tale As Old As Time',
+      date: 'December 25, 2025',
+      content: `
+        <p>The story of how a young's life was changed forever by an edible triangle on a fateful trip to Shoprite. Yamba Media presents: Kasamba vs Doritos</p>
+        <p>It all started on a regular Saturday afternoon. The fluorescent lights of Shoprite illuminated the snack aisle like a beacon of destiny. There, among the familiar packages, stood two warriors of crunch – the local champion Kasamba and the international sensation Doritos.</p>
+        <p>The decision seemed simple, but it represented so much more: tradition versus innovation, local versus global, the familiar comfort of home versus the allure of something new.</p>
+        <p>In the end, the choice was both – because at Yamba Media, we believe in celebrating diversity, honoring our roots while embracing new experiences. After all, why choose when you can enjoy the best of both worlds?</p>
+        <p>This holiday season, we're reminded that the best stories come from the simplest moments. Here's to edible triangles and the memories they create!</p>
+      `
+    }
+  };
+
+  // Add click handlers to all blog post links
+  document.querySelectorAll('.blog-card a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Determine which post to show based on card position
+      const card = this.closest('.blog-card');
+      const allCards = Array.from(document.querySelectorAll('.blog-card'));
+      const index = allCards.indexOf(card);
+      
+      // Map card index to post ID (repeating pattern)
+      const postIds = ['elections-2026', 'mukazi-samba', 'kasamba-vs-doritos'];
+      const postId = postIds[index % 3];
+      const post = blogPosts[postId];
+      
+      if (post) {
+        modalTitle.textContent = post.title;
+        modalDate.textContent = post.date;
+        modalContent.innerHTML = post.content;
+        blogModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  });
+
+  // Close modal handlers
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      blogModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+  }
+
+  // Close on outside click
+  blogModal.addEventListener('click', function(e) {
+    if (e.target === blogModal) {
+      blogModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+  });
+
+  // Close on escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && blogModal.classList.contains('active')) {
+      blogModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+  });
+}
+
+// ACTIVE NAV LINK UPDATER
+function updateActiveNavLink() {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link[data-section], .mobile-nav-link[data-section]');
+
+  let currentSection = '';
+
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 100;
+    const sectionHeight = section.clientHeight;
+    if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+      currentSection = section.getAttribute('id');
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('data-section') === currentSection) {
+      link.classList.add('active');
+    }
+  });
+}
+
+// Also add this simple video toggle function for the inline onclick
+function toggleMute(button) {
+  const videoContainer = button.closest('.project-video-container');
+  if (videoContainer) {
+    const video = videoContainer.querySelector('video');
+    const icon = button.querySelector('i');
+
+    if (video && icon) {
+      video.muted = !video.muted;
+
+      if (video.muted) {
+        icon.className = 'fas fa-volume-mute';
+        button.style.background = 'rgba(0, 0, 0, 0.7)';
+      } else {
+        icon.className = 'fas fa-volume-up';
+        button.style.background = 'rgba(0, 200, 150, 0.8)';
+      }
+    }
+  }
+}
