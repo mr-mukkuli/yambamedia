@@ -17,21 +17,18 @@
   <nav id="navbar">
     <div class="nav-container">
       <div class="nav-content">
-        <button id="logo-button" class="logo-button">
+        <a href="index.html" id="logo-button" class="logo-button">
           <img src="assets/logo.png" alt="Yamba Media Logo" class="logo-img" style="width:40px;height:40px;">
           <span class="logo-name yamba-font">Yamba Media</span>
-        </button>
+        </a>
 
         <div class="desktop-nav">
-          <button class="nav-link" data-section="home">Home</button>
           <button class="nav-link" data-section="services">Services</button>
-          <button class="nav-link" data-section="pricing">Pricing</button>
           <button class="nav-link" data-section="about">About</button>
-          <button class="nav-link" data-section="team">Team</button>
           <button class="nav-link" data-section="projects">Projects</button>
-          <button class="nav-link" data-section="podcast">Podcast</button>
           <button class="nav-link" data-section="contact">Contact</button>
           <a href="audio.html" class="nav-link">Audio Services</a>
+          <a href="blog.html" class="nav-link">Blog</a>
         </div>
 
         <button id="mobile-menu-toggle" class="mobile-menu-toggle">
@@ -728,51 +725,6 @@
         }
       }
     </script>
-
-
-    <!-- Podcast Section -->
-    <section id="podcast" class="podcast-section" style="background-color: var(--card); padding: 4rem 0;">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Our Podcast</h2>
-          <p class="section-description">Listen to our latest episodes on YouTube</p>
-        </div>
-
-        <div class="podcast-grid"
-          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-          <!-- Podcast Episode 1 -->
-          <div class="podcast-card"
-            style="background: var(--background); border-radius: 12px; overflow: hidden; transition: var(--transition);">
-            <div class="podcast-thumbnail"
-              style="position: relative; padding-bottom: 56.25%; background: linear-gradient(135deg, var(--primary), var(--blue));">
-              <img src="assets/podcast1-thumb.jpg" alt="Podcast Episode 1"
-                style="position: absolute; width: 100%; height: 100%; object-fit: cover;">
-              <div class="play-button"
-                style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255,255,255,0.9); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
-                <i class="fas fa-play" style="color: var(--primary); font-size: 1.5rem; margin-left: 4px;"></i>
-              </div>
-            </div>
-            <div class="podcast-info" style="padding: 1.5rem;">
-              <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem;">Creative Perspectives</h3>
-              <p style="color: var(--muted-foreground); margin-bottom: 1rem;">Exploring creativity in the digital age
-              </p>
-              <a href="https://youtube.com/your-channel" target="_blank" class="btn btn-outline" style="width: 100%;">
-                <i class="fab fa-youtube"></i> Watch on YouTube
-              </a>
-            </div>
-          </div>
-
-          <!-- Add more podcast episodes as needed -->
-        </div>
-
-        <div style="text-align: center; margin-top: 3rem;">
-          <a href="https://youtube.com/your-channel" target="_blank" class="btn btn-primary">
-            <i class="fab fa-youtube"></i> Visit Our YouTube Channel
-          </a>
-        </div>
-      </div>
-    </section>
-
 
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
