@@ -4,22 +4,20 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yamba Media CMS</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  
+  <!-- Use the new Identity -->
+  <script src="https://unpkg.com/gotrue-js/dist/gotrue-js.js"></script>
 </head>
 <body>
-  <!-- Include the Decap CMS library -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   
-  <!-- Initialize Netlify Identity -->
   <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
+    // Initialize the CMS
+    CMS.init();
+    
+    // Manual login redirect if needed
+    if (window.location.hash === '#/') {
+      window.location.href = '/admin/#/login';
     }
   </script>
 </body>
