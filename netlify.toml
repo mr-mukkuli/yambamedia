@@ -1,13 +1,25 @@
 [build]
-  command = "bundle install && bundle exec jekyll build"
-  publish = "_site"
+  publish = "/"
 
+# Disable all processing for static site
 [build.environment]
-  RUBY_VERSION = "3.2.2"
-  
-# Redirect /blog.html to /blog/ for proper Jekyll routing
+  NETLIFY_VIDEO_PROCESSING = "false"
+
+# Video headers
+[[headers]]
+  for = "/*.mp4"
+  [headers.values]
+    Content-Type = "video/mp4"
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/*.m4v"
+  [headers.values]
+    Content-Type = "video/mp4" 
+    Cache-Control = "public, max-age=31536000"
+
+# Admin redirect
 [[redirects]]
-  from = "/blog.html"
-  to = "/blog/"
-  status = 301
-  force = true
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200
