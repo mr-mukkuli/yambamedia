@@ -4,21 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yamba Media CMS</title>
-  
-  <!-- Use the new Identity -->
-  <script src="https://unpkg.com/gotrue-js/dist/gotrue-js.js"></script>
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  
-  <script>
-    // Initialize the CMS
-    CMS.init();
-    
-    // Manual login redirect if needed
-    if (window.location.hash === '#/') {
-      window.location.href = '/admin/#/login';
-    }
-  </script>
 </body>
 </html>

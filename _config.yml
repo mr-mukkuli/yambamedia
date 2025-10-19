@@ -15,9 +15,16 @@ collections:
 
 # Exclude from processing
 exclude:
-  - admin/
   - "*.mp4"
   - "*.mov"
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .bundle
+
+# Include these files in the build
+include:
+  - _redirects
 
 # Defaults
 defaults:
