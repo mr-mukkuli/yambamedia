@@ -137,20 +137,59 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // 7. PRICING CALCULATOR FUNCTIONALITY
+  // 7. PRICING PLAN BUTTONS
+  initPricingPlanButtons();
+
+  // 8. PRICING CALCULATOR FUNCTIONALITY
   initPricingCalculator();
 
-  // 8. FORM SUCCESS HANDLER
+  // 9. FORM SUCCESS HANDLER
   initFormHandler();
 
-  // 9. VIDEO CONTROLS
+  // 10. VIDEO CONTROLS
   initVideoControls();
 
-  // 10. BLOG POST MODALS
+  // 11. BLOG POST MODALS
   initBlogModals();
 
   console.log('All event listeners set up');
 });
+
+// PRICING PLAN BUTTONS
+function initPricingPlanButtons() {
+  const pricingPlanButtons = document.querySelectorAll('.pricing-plan-btn');
+  
+  pricingPlanButtons.forEach(button => {
+    button.addEventListener('click', function(e) {
+      const plan = this.getAttribute('data-plan');
+      const price = this.getAttribute('data-price');
+      
+      if (plan && price) {
+        // Populate the message field with the selected plan
+        const messageField = document.getElementById('message');
+        const serviceField = document.getElementById('service');
+        
+        if (messageField) {
+          messageField.value = `I'm interested in the ${plan} plan (${price}).\n\nAdditional details:\n`;
+        }
+        
+        // Set the service dropdown to social media
+        if (serviceField) {
+          serviceField.value = 'social-media';
+        }
+        
+        // Scroll to contact section (handled by existing data-section logic)
+        // Focus on message field after scroll
+        setTimeout(() => {
+          if (messageField) {
+            messageField.focus();
+            messageField.setSelectionRange(messageField.value.length, messageField.value.length);
+          }
+        }, 800);
+      }
+    });
+  });
+}
 
 // PRICING CALCULATOR
 function initPricingCalculator() {
@@ -206,6 +245,34 @@ function initPricingCalculator() {
   // Form submission handler
   if (getQuoteBtn) {
     getQuoteBtn.addEventListener('click', function () {
+      // Collect selected services and total for the contact form
+      let selected = [];
+      let total = 0;
+      
+      checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+          const price = parseInt(checkbox.dataset.price);
+          const service = checkbox.dataset.service;
+          total += price;
+          selected.push(service);
+        }
+      });
+
+      // Populate the contact form message field with selected services
+      const messageField = document.getElementById('message');
+      if (messageField && selected.length > 0) {
+        const servicesText = selected.join('\n- ');
+        messageField.value = `I'm interested in the following services:\n\n- ${servicesText}\n\nEstimated Total: K ${total.toLocaleString()}\n\nAdditional details:\n`;
+        
+        // Focus on the message field so user can see the pre-filled content
+        setTimeout(() => {
+          messageField.focus();
+          // Move cursor to end of text
+          messageField.setSelectionRange(messageField.value.length, messageField.value.length);
+        }, 500);
+      }
+
+      // Close modal
       if (pricingModal) {
         pricingModal.classList.remove('active');
         document.body.style.overflow = 'auto';
@@ -244,27 +311,8 @@ function initFormHandler() {
 
 // VIDEO CONTROLS
 function initVideoControls() {
-  document.querySelectorAll('.mute-toggle').forEach(button => {
-    button.addEventListener('click', function () {
-      const videoContainer = this.closest('.project-video-container');
-      if (videoContainer) {
-        const video = videoContainer.querySelector('video');
-        const icon = this.querySelector('i');
-
-        if (video && icon) {
-          video.muted = !video.muted;
-
-          if (video.muted) {
-            icon.className = 'fas fa-volume-mute';
-            this.style.background = 'rgba(0, 0, 0, 0.7)';
-          } else {
-            icon.className = 'fas fa-volume-up';
-            this.style.background = 'rgba(0, 200, 150, 0.8)';
-          }
-        }
-      }
-    });
-  });
+  // Video controls are handled by inline onclick="toggleMute(this)" for simplicity
+  // No additional event listeners needed
 }
 
 // BLOG POST MODALS
@@ -385,23 +433,25 @@ function updateActiveNavLink() {
   });
 }
 
-// Also add this simple video toggle function for the inline onclick
+// Video toggle function for inline onclick handlers
 function toggleMute(button) {
   const videoContainer = button.closest('.project-video-container');
-  if (videoContainer) {
-    const video = videoContainer.querySelector('video');
-    const icon = button.querySelector('i');
+  if (!videoContainer) return;
+  
+  const video = videoContainer.querySelector('video');
+  const icon = button.querySelector('i');
 
-    if (video && icon) {
-      video.muted = !video.muted;
+  if (video && icon) {
+    // Toggle mute state
+    video.muted = !video.muted;
 
-      if (video.muted) {
-        icon.className = 'fas fa-volume-mute';
-        button.style.background = 'rgba(0, 0, 0, 0.7)';
-      } else {
-        icon.className = 'fas fa-volume-up';
-        button.style.background = 'rgba(0, 200, 150, 0.8)';
-      }
+    // Update icon and button styling based on mute state
+    if (video.muted) {
+      icon.className = 'fas fa-volume-mute';
+      button.style.background = 'rgba(0, 0, 0, 0.7)';
+    } else {
+      icon.className = 'fas fa-volume-up';
+      button.style.background = 'rgba(0, 200, 150, 0.8)';
     }
   }
 }
