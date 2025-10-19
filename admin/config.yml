@@ -2,6 +2,9 @@ backend:
   name: git-gateway
   branch: main
 
+
+local_backend: true  # Add this line for local development
+
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
@@ -17,3 +20,4 @@ collections:
       - { label: "Excerpt", name: "excerpt", widget: "text" }
       - { label: "Featured Image", name: "image", widget: "image", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
+
