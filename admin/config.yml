@@ -1,8 +1,6 @@
 backend:
-  name: github
-  repo: mr-mukkuli/yambamedia
+  name: git-gateway
   branch: main
-  auth_type: implicit  # This uses GitHub OAuth
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
