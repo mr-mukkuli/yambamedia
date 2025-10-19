@@ -1,13 +1,26 @@
 [build]
-bundle install && bundle exec jekyll build"
-command = "
-publish = " site"
-[build. environment]
-RUBY VERSION = "3.2.2"
-NETLIFY_VIDEO_PROCESSING = "false"
-# Redirect /blog. html to /blog/ for proper Jekyll routing
-[ [redirects]]
-from = "/blog.html"
-to 'blog/"
-status = 301
-force = true
+  command = "bundle install && bundle exec jekyll build"
+  publish = "_site"
+
+[build.environment]
+  RUBY_VERSION = "3.2.2"
+  NETLIFY_VIDEO_PROCESSING = "false"  # Add this line to fix videos
+
+# Video headers - add this section
+[[headers]]
+  for = "/*.mp4"
+  [headers.values]
+    Content-Type = "video/mp4"
+    Cache-Control = "public, max-age=31536000"
+
+# Keep your existing redirects
+[[redirects]]
+  from = "/blog.html"
+  to = "/blog/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200
