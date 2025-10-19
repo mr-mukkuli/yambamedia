@@ -1,7 +1,7 @@
 [build]
   publish = "/"
 
-# Disable all processing for static site
+# Only disable video processing, keep everything else
 [build.environment]
   NETLIFY_VIDEO_PROCESSING = "false"
 
@@ -12,14 +12,14 @@
     Content-Type = "video/mp4"
     Cache-Control = "public, max-age=31536000"
 
-[[headers]]
-  for = "/*.m4v"
-  [headers.values]
-    Content-Type = "video/mp4" 
-    Cache-Control = "public, max-age=31536000"
-
 # Admin redirect
 [[redirects]]
   from = "/admin/*"
   to = "/admin/index.html"
+  status = 200
+
+# Blog redirect to proper HTML file
+[[redirects]]
+  from = "/blog"
+  to = "/blog.html"
   status = 200
