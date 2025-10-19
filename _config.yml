@@ -1,7 +1,7 @@
 title: "Yamba Media"
 description: "Creativity from a different perspective"
-baseurl: ""
-url: "https://yourdomain.com"  # Replace with your actual domain
+baseurl: ""  # Leave empty for custom domain
+url: "https://yambamedia.com"  # Your actual domain
 
 # Build settings
 markdown: kramdown
@@ -11,7 +11,7 @@ permalink: pretty
 collections:
   posts:
     output: true
-    permalink: /blog/:slug/
+    permalink: /blog/:title/
 
 # Exclude from processing
 exclude:
