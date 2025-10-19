@@ -1,9 +1,8 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: mr-mukkuli/yambamedia
   branch: main
-
-
-local_backend: true  # Add this line for local development
+  auth_type: implicit  # This uses GitHub OAuth
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
@@ -20,4 +19,3 @@ collections:
       - { label: "Excerpt", name: "excerpt", widget: "text" }
       - { label: "Featured Image", name: "image", widget: "image", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
-
