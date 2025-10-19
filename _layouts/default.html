@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} - Yamba Media{% else %}Yamba Media - Creativity from a different
+        perspective{% endif %}</title>
+    <meta name="description"
+        content="{% if page.excerpt %}{{ page.excerpt | strip_html | truncate: 160 }}{% else %}Empowering businesses, corporates, and schools to tell their unique stories with unparalleled creativity.{% endif %}">
+    <link rel="icon" type="image/png" href="/assets/logo.png">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="nav-content">
+                <a href="/" id="logo-button" class="logo-button">
+                    <img src="/assets/logo.png" alt="Yamba Media Logo" class="logo-img" style="width:40px;height:40px;">
+                    <span class="logo-name yamba-font">Yamba Media</span>
+                </a>
+                <div class="desktop-nav">
+                    <a href="/" class="nav-link">Home</a>
+                    <a href="/audio.html" class="nav-link">Audio Services</a>
+                    <a href="/blog.html" class="nav-link">Blog</a>
+                </div>
+                <button id="mobile-menu-toggle" class="mobile-menu-toggle">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+            <div id="mobile-menu" class="mobile-menu">
+                <a href="/" class="mobile-nav-link">Home</a>
+                <a href="/audio.html" class="mobile-nav-link">Audio Services</a>
+                <a href="/blog.html" class="mobile-nav-link">Blog</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="snap-container">
+        {{ content }}
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="/assets/logo.png" alt="Yamba Media Logo" style="width:40px;height:40px;">
+                        <span class="footer-logo-name yamba-font">Yamba Media</span>
+                    </div>
+                    <p class="footer-tagline">Creativity from a different perspective</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Follow us, we're funny.</h3>
+                    <div class="social-links">
+                        <!-- Your social links here -->
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> Yamba Media. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+
+</html>

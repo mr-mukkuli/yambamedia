@@ -1,0 +1,47 @@
+title: "Yamba Media"
+email: your-email@example.com
+description: "Creativity from a different perspective"
+baseurl: ""
+url: "https://yourdomain.com"
+twitter_username: yambamediazm
+github_username: yourusername
+
+# Build settings
+markdown: kramdown
+# theme: minima  # Remove or comment this line
+plugins:
+  - jekyll-feed
+
+# Explicitly set empty defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+collections:
+  posts:
+    title: Blog Posts
+    output: true
+    permalink: /blog/:title/
+
+# Netlify CMS
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets"
+public_folder: "/assets"
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }

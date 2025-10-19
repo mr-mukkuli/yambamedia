@@ -1,0 +1,30 @@
+---
+layout: default
+---
+<article class="blog-post" style="padding: 4rem 0; background: var(--card);">
+    <div class="container">
+        <header class="post-header" style="text-align: center; margin-bottom: 3rem;">
+            <h1 class="post-title" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;">{{ page.title
+                }}</h1>
+            <div class="post-meta" style="color: var(--muted-foreground); margin-bottom: 2rem;">
+                <span class="post-date">{{ page.date | date: "%B %d, %Y" }}</span>
+            </div>
+            {% if page.image %}
+            <div class="post-image" style="max-width: 800px; margin: 0 auto; border-radius: 12px; overflow: hidden;">
+                <img src="{{ page.image }}" alt="{{ page.title }}" style="width: 100%; height: auto; display: block;">
+            </div>
+            {% endif %}
+        </header>
+
+        <div class="post-content" style="max-width: 800px; margin: 0 auto; font-size: 1.125rem; line-height: 1.8;">
+            {{ content }}
+        </div>
+
+        <div class="post-navigation"
+            style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+            <a href="/blog.html" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Back to Blog
+            </a>
+        </div>
+    </div>
+</article>
