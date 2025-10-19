@@ -1,105 +1,35 @@
-<!DOCTYPE html>
-<html lang="en" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog - Yamba Media</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-</head>
-<body>
-  <!-- Your existing navigation -->
-  <nav id="navbar">
-    <div class="nav-container">
-      <div class="nav-content">
-        <a href="/" id="logo-button" class="logo-button">
-          <img src="/assets/logo.png" alt="Yamba Media Logo" class="logo-img" style="width:40px;height:40px;">
-          <span class="logo-name yamba-font">Yamba Media</span>
-        </a>
-        <div class="desktop-nav">
-          <a href="/" class="nav-link">Home</a>
-          <a href="/audio.html" class="nav-link">Audio Services</a>
-          <a href="/blog.html" class="nav-link">Blog</a>
-        </div>
-        <button id="mobile-menu-toggle" class="mobile-menu-toggle">
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-        </button>
-      </div>
-      <div id="mobile-menu" class="mobile-menu">
-        <a href="/" class="mobile-nav-link">Home</a>
-        <a href="/audio.html" class="mobile-nav-link">Audio Services</a>
-        <a href="/blog.html" class="mobile-nav-link">Blog</a>
-      </div>
-    </div>
-  </nav>
+---
+layout: default
+title: Blog
+---
 
-  <section class="blog-section">
+<section class="blog-section">
     <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Our Blog</h2>
-        <p class="section-description">Insights, tips, and creative perspectives from our team</p>
-      </div>
+        <div class="section-header">
+            <h2 class="section-title">Our Blog</h2>
+            <p class="section-description">Insights, tips, and creative perspectives from our team</p>
+        </div>
 
-      <div id="blog-container" class="blog-grid">
-        <!-- Blog posts will load here -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Your existing footer -->
-  <footer class="footer">
-    <!-- Your footer content -->
-  </footer>
-
-  <script src="script.js"></script>
-  <script>
-    // Simple blog loader
-    async function loadBlogPosts() {
-      try {
-        // This would load from a JSON file or API
-        // For now, we'll create sample posts
-        const posts = [
-          {
-            date: "December 10, 2024",
-            title: "2026 elections are here",
-            excerpt: "The not so interesting, but very interesting question on everyone's mind...",
-            slug: "2026-elections"
-          },
-          {
-            date: "October 7, 2024", 
-            title: "Guys Mukazi Samba",
-            excerpt: "October heat in the land of work and joy...",
-            slug: "mukazi-samba"
-          }
-        ];
-        
-        const container = document.getElementById('blog-container');
-        container.innerHTML = posts.map(post => `
-          <div class="blog-card">
-            <div class="blog-content">
-              <span class="blog-date">${post.date}</span>
-              <h3>${post.title}</h3>
-              <p>${post.excerpt}</p>
-              <a href="#" class="blog-read-more" onclick="showBlogPost('${post.slug}')">
-                Read More <i class="fas fa-arrow-right"></i>
-              </a>
+        <div class="blog-grid">
+            {% for post in site.posts %}
+            <div class="blog-card">
+                <div class="blog-image">
+                    {% if post.image %}
+                    <img src="{{ post.image }}" alt="{{ post.title }}" style="width: 100%; height: 200px; object-fit: cover;">
+                    {% else %}
+                    <i class="fas fa-newspaper"></i>
+                    {% endif %}
+                </div>
+                <div class="blog-content">
+                    <span class="blog-date">{{ post.date | date: "%B %d, %Y" }}</span>
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.excerpt }}</p>
+                    <a href="{{ post.url }}" class="blog-read-more">
+                        Read More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </div>
-          </div>
-        `).join('');
-      } catch (error) {
-        console.error('Error loading blog:', error);
-      }
-    }
-    
-    function showBlogPost(slug) {
-      // Your existing modal logic
-      alert('Show post: ' + slug);
-    }
-    
-    // Load posts when page loads
-    loadBlogPosts();
-  </script>
-</body>
-</html>
+            {% endfor %}
+        </div>
+    </div>
+</section>
