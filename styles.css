@@ -43,7 +43,7 @@ body {
   letter-spacing: 0.5px;
 }
 
-/* Navbar logo */
+/* Navbar  */
 .logo-img {
   width: 50px !important;
   height: 50px !important;
@@ -51,7 +51,7 @@ body {
   max-height: none;
 }
 
-/* Hero logo */
+/* Hero logo sectionpart */
 .hero-logo-diamond {
   width: 340px !important;
   height: 340px !important;
@@ -69,7 +69,7 @@ body {
   max-height: 100%;
 }
 
-/* About logo */
+/* About logo part */
 .about-logo-diamond {
   width: 420px !important;
   height: 420px !important;
@@ -105,7 +105,7 @@ strong {
   color: var(--primary);
 }
 
-/* Ensure navbar has proper positioning */
+/* proper positioning of the navigation bar */
 #navbar {
   position: fixed;
   top: 0;
@@ -385,7 +385,7 @@ strong {
   background-color: var(--blue);
 }
 
-/* Keyframes for breathing effect */
+/* to make it look like the things behind are breathing effect */
 @keyframes oddDiamondBreath {
 
   0%,
@@ -510,7 +510,7 @@ strong {
   justify-content: center;
 }
 
-/* Buttons */
+/* Buttons styling */
 .btn {
   padding: 0.75rem 2rem;
   border-radius: 9999px;
@@ -552,7 +552,7 @@ strong {
   width: 100%;
 }
 
-/* Section Styles */
+/* Section Styleling */
 section {
   padding: 4rem 0;
   scroll-snap-align: start;
@@ -881,7 +881,7 @@ section {
   transform: rotate(90deg);
 }
 
-/* Pricing Calculator (Inside Modal) */
+/* Pricing Calculator (Inside Modal popup thingy) */
 .pricing-calculator {
   display: grid;
   grid-template-columns: 1fr;
@@ -1672,7 +1672,7 @@ section {
   vertical-align: middle;
 }
 
-/* ===== ABOUT SECTION MOBILE FIXES ===== */
+/* about section mobile optimized */
 @media (max-width: 767px) {
   .about-section .container {
     padding: 0 1rem;
@@ -1682,17 +1682,16 @@ section {
     gap: 2rem;
   }
 
-  /* FIX THE CONTAINER SIZE */
+  /* fixes the calculator size */
   .about-logo-container {
     padding: 1.5rem;
     max-width: 100%;
     width: 100%;
     aspect-ratio: unset;
-    /* Remove fixed aspect ratio on mobile */
     min-height: auto;
   }
 
-  /* FIX THE DIAMOND CONTAINER */
+  /* foxes the diamond container. */
   .about-logo-diamond {
     width: 120px !important;
     height: 120px !important;
@@ -1744,7 +1743,7 @@ section {
   vertical-align: middle;
 }
 
-/* ===== ABOUT SECTION MOBILE FIXES ===== */
+/* about section mobile fix */
 @media (max-width: 767px) {
   .about-section .container {
     padding: 0 1rem;
@@ -1754,17 +1753,16 @@ section {
     gap: 2rem;
   }
 
-  /* FIX THE CONTAINER SIZE */
+  /* Fix logo continer size */
   .about-logo-container {
     padding: 1.5rem;
     max-width: 100%;
     width: 100%;
     aspect-ratio: unset;
-    /* Remove fixed aspect ratio on mobile */
     min-height: auto;
   }
 
-  /* FIX THE DIAMOND CONTAINER */
+  /* fixes the diamond container */
   .about-logo-diamond {
     width: 120px !important;
     height: 120px !important;
@@ -1826,7 +1824,7 @@ section {
 }
 
 
-/* ===== MOBILE MODAL FIXES ===== */
+/* modal for mobile */
 @media (max-width: 768px) {
   .modal-content {
     margin: 20px auto;
@@ -1910,7 +1908,7 @@ section {
   }
 }
 
-/* ===== SMALL PHONE FIXES ===== */
+/* really small screen optimization */
 @media (max-width: 480px) {
   .modal-content {
     margin: 10px auto;
@@ -1940,7 +1938,7 @@ section {
   }
 }
 
-/* ===== MODAL SCROLL FIXES ===== */
+/* modal scroll fix. */
 .modal-content {
   -webkit-overflow-scrolling: touch;
   /* Smooth scrolling on iOS */
@@ -2013,7 +2011,7 @@ section {
   font-size: 1rem;
 }
 
-/* Remove old project-icon styles */
+/* Remove old project icon styles */
 .project-card .project-icon {
   display: none;
 }
@@ -2120,7 +2118,7 @@ section {
 }
 
 
-/* Add this to your CSS file - missing button styles */
+/* missing button styles */
 .btn-secondary {
   background-color: transparent;
   color: var(--primary);
